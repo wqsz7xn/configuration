@@ -1,0 +1,30 @@
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+        , borderColor = "black"
+        , border = TopB
+        , bgColor = "black"
+        , fgColor = "grey"
+        , position = TopW L 100
+        , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                     , Run Memory ["-t","Mem: <usedratio>%"] 10
+                     , Run Swap [] 10
+                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                     , Run StdinReader
+			, Run Battery ["-t", "B: <acstatus> <watts> (<left> / <timeleft>)",
+					  "-L", "10", "-H", "80", "-p", "3",
+					  "-S", "True",
+					  "--", "-O", "<fc=#39D7E5>On</fc> -", "-i", "",
+					  "-L", "-15", "-H", "-5",
+					  "-l", "#E55C50",
+					  "-m", "#2D7AE5",
+					  "-h", "#C0E550"]
+					 3000
+                     ]
+        , sepChar = "%"
+        , alignSep = "}{"
+        , template = "%StdinReader% | %cpu% | %memory% | %battery% }{<fc=#ee9a00>%date%</fc> "
+	, overrideRedirect = False
+	, lowerOnStart = False
+	, hideOnStart = False
+	, persistent = True
+        }
+
