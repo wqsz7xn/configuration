@@ -1,9 +1,9 @@
 Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
+        , position = Static { xpos = 0, ypos = 0, width = 1330, height = 20 }
         , borderColor = "black"
         , border = TopB
         , bgColor = "black"
         , fgColor = "grey"
-        , position = TopW L 100
         , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
                      , Run Memory ["-t","Mem: <usedratio>%"] 10
                      , Run Swap [] 10
@@ -17,7 +17,7 @@ Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
 					  "-l", "#E55C50",
 					  "-m", "#2D7AE5",
 					  "-h", "#C0E550"]
-					 3000
+					 120
                      ]
         , sepChar = "%"
         , alignSep = "}{"

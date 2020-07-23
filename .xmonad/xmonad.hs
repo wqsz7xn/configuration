@@ -18,16 +18,21 @@ main = do
         { layoutHook = avoidStruts $ layoutHook defaultConfig
         , logHook = dynamicLogWithPP xmobarPP
                         { ppOutput = hPutStrLn xmproc
-                        , ppTitle = xmobarColor "green" "" . shorten 50
+                        , ppTitle = xmobarColor "green" "" . shorten 20
                         }
         , modMask = mod4Mask
+        , focusedBorderColor = "#FFFF00"
+	, borderWidth = 1
         } `additionalKeys`
         [ ((mod4Mask, xK_a ), spawn "scrot -s")
-        , ((mod4Mask, xK_l ), spawn "sleep 1; xset dpms force off; slock")
         , ((mod4Mask, xK_r ), spawn "autorandr --change")
+        , ((mod4Mask, xK_e ), spawn "emacs")
+        , ((mod4Mask, xK_f ), spawn "firefox")
+        , ((mod4Mask, xK_m ), spawn "thunderbird")
         , ((0, xF86XK_AudioLowerVolume   ), spawn "amixer set Master 2-")
         , ((0, xF86XK_AudioRaiseVolume   ), spawn "amixer set Master 2+")
-        , ((0, xF86XK_AudioMute          ), spawn "amixer set Master toggle")
+        , ((0, xF86XK_AudioMute          ), spawn "amixer -D pulse set Master Playback Switch toggle")
+        , ((0, xF86XK_AudioMicMute), spawn "amixer set Capture toggle")
         , ((mod4Mask, xK_z),
             xmonadPromptC systemPromptCmds defaultXPConfig)
         ]
