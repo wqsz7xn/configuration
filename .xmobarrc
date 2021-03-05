@@ -1,5 +1,5 @@
 Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
-        , position = Static { xpos = 0, ypos = 0, width = 1330, height = 20 }
+        , position = Static { xpos = 0, ypos = 0, width = 1870, height = 20 }
         , borderColor = "black"
         , border = TopB
         , bgColor = "black"
