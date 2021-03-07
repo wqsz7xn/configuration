@@ -28,7 +28,6 @@
 (global-display-line-numbers-mode t)
 
 ;; packages
-
 (use-package ivy
   :diminish
   :defer 0.1
