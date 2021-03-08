@@ -27,6 +27,11 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+;; font size
+(general-define-key
+  "s-+" 'text-scale-increase
+  "s--" 'text-scale-decrease)
+
 ;; packages
 (use-package ivy
   :diminish
@@ -43,10 +48,7 @@
   :custom
   (ivy-virtual-abbreviate 'full
                           ivy-rich-switch-buffer-align-virtual-buffer t
-                          ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
+                          ivy-rich-path-style 'abbrev))
 
 (use-package swiper
   :after ivy
@@ -96,9 +98,19 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
 
+;; org
+(use-package org-download
+  :custom
+  (org-download-screenshot-method "scrot -s %s"))
+
+;; agenda span a month
+(setq org-agenda-start-on-weekday 1)
+(setq org-agenda-start-day "-7d")
+(setq org-agenda-span 'month)
+
+;; line wrap
+(setq-default fill-column 80)
+(add-hook 'text-mode-hook #'auto-fill-mode)
+
 ;; haskell
 (use-package haskell-mode)
-
-(use-package lsp-haskell
-  :hook ((haskell-mode . lsp)
-         (haskell-literate-mode . lsp)))
