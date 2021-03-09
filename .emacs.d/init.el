@@ -101,7 +101,9 @@
 ;; org
 (use-package org-download
   :custom
-  (org-download-screenshot-method "scrot -s %s"))
+  (org-download-screenshot-method "scrot -s %s")
+  (org-download-image-dir "~/org/images/")
+  (org-download-image-width 400))
 
 ;; agenda span a month
 (setq org-agenda-start-on-weekday 1)
@@ -114,3 +116,8 @@
 
 ;; haskell
 (use-package haskell-mode)
+
+(use-package lsp-haskell
+  :hook ((haskell-mode . lsp)
+         (haskell-literate-mode . lsp)))
+
