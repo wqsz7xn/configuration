@@ -71,8 +71,8 @@
   :defer 0
   :diminish which-key-mode
   :config
-  (which-key-mode)
-  (setq which-key-idle-delay 1))
+    (which-key-mode)
+    (setq which-key-idle-delay 1))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -80,9 +80,9 @@
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
-  (setq lsp-keymap-prefix "C-c l")
+    (setq lsp-keymap-prefix "C-c l")
   :config
-  (lsp-enable-which-key-integration t))
+    (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode))
@@ -99,7 +99,11 @@
   (company-idle-delay 0.0))
 
 ;; org
+(add-hook 'org-mode-hook 'turn-on-flyspell)
+
 (use-package org-download
+  :bind (("C-c i" . org-download-screenshot)
+         ("C-c y" . org-download-clipboard))
   :custom
   (org-download-screenshot-method "scrot -s %s")
   (org-download-image-dir "~/org/images/")
@@ -120,4 +124,7 @@
 (use-package lsp-haskell
   :hook ((haskell-mode . lsp)
          (haskell-literate-mode . lsp)))
+
+;; theme
+(add-to-list 'default-frame-alist '(background-color . "ivory"))
 
