@@ -27,10 +27,23 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+;; parenthesis
+(show-paren-mode 1)
+
+;; fill column
+(setq-default fill-column 80)
+(add-hook 'text-mode-hook #'auto-fill-mode)
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+
 ;; font size
 (general-define-key
   "s-+" 'text-scale-increase
   "s--" 'text-scale-decrease)
+
+;; smooth-scrolling
+;;(use-package smooth-scrolling)
+;;(smooth-scrolling-mode 1)
 
 ;; packages
 (use-package ivy
@@ -99,7 +112,18 @@
   (company-idle-delay 0.0))
 
 ;; org
-(add-hook 'org-mode-hook 'turn-on-flyspell)
+(use-package org
+  :bind (:map org-mode-map
+	      ("C-c a" . org-agenda))
+  :hook (org-mode . flyspell-mode)
+  :custom (org-agenda-files
+	    (list "~/org/todo.org")))
+
+;; TODO: Put this in custom block
+;; agenda span a month
+(setq org-agenda-start-on-weekday 1)
+(setq org-agenda-start-day "-7d")
+(setq org-agenda-span 'month)
 
 (use-package org-download
   :bind (("C-c i" . org-download-screenshot)
@@ -109,14 +133,7 @@
   (org-download-image-dir "~/org/images/")
   (org-download-image-width 400))
 
-;; agenda span a month
-(setq org-agenda-start-on-weekday 1)
-(setq org-agenda-start-day "-7d")
-(setq org-agenda-span 'month)
-
-;; line wrap
-(setq-default fill-column 80)
-(add-hook 'text-mode-hook #'auto-fill-mode)
+(use-package htmlize)
 
 ;; haskell
 (use-package haskell-mode)
@@ -128,3 +145,18 @@
 ;; theme
 (add-to-list 'default-frame-alist '(background-color . "ivory"))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/org/todo.org")))
+ '(package-selected-packages
+   (quote
+    (fill-column-indicator which-key use-package rainbow-delimiters org-download occidental-theme modus-themes magit lsp-ui lsp-haskell ivy-rich grandshell-theme general counsel company ample-theme))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
