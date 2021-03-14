@@ -33,8 +33,8 @@
 ;; fill column
 (setq-default fill-column 80)
 (add-hook 'text-mode-hook #'auto-fill-mode)
-(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
-(global-fci-mode 1)
+;;(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+;;(global-fci-mode 1)
 
 ;; font size
 (general-define-key
@@ -117,13 +117,15 @@
 	      ("C-c a" . org-agenda))
   :hook (org-mode . flyspell-mode)
   :custom (org-agenda-files
-	    (list "~/org/todo.org")))
+	   (list "~/org/todo.org")))
 
 ;; TODO: Put this in custom block
 ;; agenda span a month
 (setq org-agenda-start-on-weekday 1)
 (setq org-agenda-start-day "-7d")
 (setq org-agenda-span 'month)
+(setq org-directory "~/org/")
+(setq org-archive-location (concat org-directory "/archive.org::"))
 
 (use-package org-download
   :bind (("C-c i" . org-download-screenshot)
@@ -144,16 +146,14 @@
 
 ;; theme
 (add-to-list 'default-frame-alist '(background-color . "ivory"))
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/org/todo.org")))
  '(package-selected-packages
    (quote
-    (fill-column-indicator which-key use-package rainbow-delimiters org-download occidental-theme modus-themes magit lsp-ui lsp-haskell ivy-rich grandshell-theme general counsel company ample-theme))))
+    (htmlize which-key use-package rainbow-delimiters org-download magit lsp-ui lsp-haskell ivy-rich grandshell-theme general counsel company))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
