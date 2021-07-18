@@ -36,11 +36,6 @@
 ;;(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 ;;(global-fci-mode 1)
 
-;; font size
-(general-define-key
-  "s-+" 'text-scale-increase
-  "s--" 'text-scale-decrease)
-
 ;; smooth-scrolling
 (use-package smooth-scrolling
   :init
@@ -149,9 +144,38 @@
 
 (use-package htmlize)
 
+;; evil
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
 ;; haskell
 (use-package haskell-mode)
 
 (use-package lsp-haskell
   :hook ((haskell-mode . lsp)
          (haskell-literate-mode . lsp)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (lsp-haskell haskell-mode htmlize org-bullets org-download company lsp-ui lsp-mode rainbow-delimiters which-key general magit counsel swiper ivy-rich ivy smooth-scrolling use-package))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
